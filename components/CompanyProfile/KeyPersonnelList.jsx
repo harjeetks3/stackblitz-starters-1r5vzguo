@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Badge } from "../ui/badge";
+import Badge from "../ui/badge";
 import FileUploader from './FileUploader';
 import { Plus, Edit2, Trash2, User, Briefcase, Award, Upload } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
