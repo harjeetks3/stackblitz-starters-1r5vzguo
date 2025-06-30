@@ -5,7 +5,7 @@ import { api } from "../../lib/api";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import Badge from "../ui/badge";
+import { Badge } from "../ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import CertificationsList from "./CertificationsList";
 import MajorProjectsList from "./MajorProjectsList";
