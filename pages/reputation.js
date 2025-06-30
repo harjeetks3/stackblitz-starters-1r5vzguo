@@ -5,7 +5,7 @@ import React from 'react';
 import useSWR from 'swr';
 import { fetcher } from '../lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+import Badge from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Award, Shield, ExternalLink, Calendar, CheckCircle, TrendingUp, FileText, Clock as Blockchain, Trophy } from 'lucide-react';
 import { format } from 'date-fns';
