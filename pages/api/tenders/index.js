@@ -3,6 +3,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { tenderOperations, fileOperations } from '../../../lib/database';
+import Badge from "../ui/badge";
 
 export default async function handler(req, res) {
   // Only allow GET requests
