@@ -5,6 +5,8 @@ const path = require('path');
 // Load environment variables
 require('dotenv').config({ path: '.env.local' });
 
+console.log('[Seed Script] Script started.'); // ADD THIS LINE
+
 // Validate environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
