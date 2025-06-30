@@ -14,7 +14,7 @@ import FloatingAIAssistant from '../../../components/ProposalEditor/FloatingAIAs
 import TranslationPanel from '../../../components/Translation/TranslationPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
+import Badge from '../../../components/ui/badge';
 import Link from 'next/link';
 import { ArrowLeft, Sparkles, Building2, Clock, Shield, AlertCircle, CheckCircle, Send, ExternalLink, FileText, Award, TrendingUp, Trophy, Clock as Blocks, Plus, RefreshCw, Maximize, Minimize, Languages, Lightbulb, Eye, EyeOff } from 'lucide-react';
 import { format } from 'date-fns';
