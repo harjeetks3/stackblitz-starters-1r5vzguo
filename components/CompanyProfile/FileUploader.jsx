@@ -2,28 +2,40 @@
 // File upload component for compliance documents and certificates
 // Handles file selection, upload progress, and file management
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Upload, 
   FileText, 
   Trash2,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Link as LinkIcon
 } from 'lucide-react';
 import { Button } from '../ui/button';
+import { api } from '../../lib/api';
+import { useToast } from '../../hooks/useToast';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function FileUploader({ 
   acceptedTypes = ".pdf,.doc,.docx,.jpg,.png", 
   maxSize = 5, // MB
   onFileUpload,
   existingFiles = [],
-  disabled = false
+  disabled = false,
+  linkedEntity = 'general_document',
+  linkedId = null
 }) {
+  const { addToast } = useToast();
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState(existingFiles);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
+
+  // Update local state when existingFiles prop changes
+  useEffect(() => {
+    setFiles(existingFiles);
+  }, [existingFiles]);
 
   // Handle drag events
   const handleDrag = (e) => {
@@ -81,28 +93,48 @@ export default function FileUploader({
       try {
         setUploading(true);
         
-        // Simulate file upload (replace with actual upload logic)
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Create FormData for multipart upload
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('linkedEntity', linkedEntity);
+        formData.append('linkedId', linkedId || uuidv4());
+
+        // Upload file to Supabase via API
+        const response = await api('/api/files', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            // Let the browser set the Content-Type for FormData
+            'Content-Type': undefined,
+          },
+        });
+        
+        console.log('File upload response:', response);
+        
+        if (!response.success) {
+          throw new Error(response.error || 'Upload failed');
+        }
         
         const newFile = {
-          id: Date.now() + Math.random(),
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          uploadedAt: new Date().toISOString(),
-          status: 'uploaded',
-          file: file // Store the actual file object
+          id: response.file.id,
+          name: response.file.name,
+          size: response.file.size,
+          type: response.file.type,
+          filePath: response.file.filePath,
+          signedUrl: response.file.signedUrl,
+          uploadedAt: response.file.uploadedAt || new Date().toISOString()
         };
         
-        const updatedFiles = [...files, newFile];
-        setFiles(updatedFiles);
+        setFiles(prev => [...prev, newFile]);
+        addToast('File uploaded successfully!', 'success');
         
         if (onFileUpload) {
           onFileUpload(newFile);
         }
       } catch (error) {
         console.error('Upload failed:', error);
-        setError(`Failed to upload ${file.name}`);
+        setError(`Failed to upload ${file.name}: ${error.message}`);
+        addToast(`Failed to upload file: ${error.message}`, 'error');
       } finally {
         setUploading(false);
       }
@@ -110,16 +142,25 @@ export default function FileUploader({
   };
 
   // Remove file
-  const removeFile = (fileId) => {
-    const updatedFiles = files.filter(file => file.id !== fileId);
-    setFiles(updatedFiles);
-    
-    // Notify parent component
-    if (onFileUpload) {
-      const removedFile = files.find(file => file.id === fileId);
-      if (removedFile) {
-        onFileUpload(null, removedFile);
+  const removeFile = async (fileId, filePath) => {
+    try {
+      // Call API to delete file from storage and database
+      await api(`/api/files?filePath=${encodeURIComponent(filePath)}`, {
+        method: 'DELETE',
+      });
+
+      const updatedFiles = files.filter(file => file.id !== fileId);
+      setFiles(updatedFiles);
+      addToast('File removed successfully!', 'success');
+      
+      // Notify parent component
+      if (onFileUpload) {
+        onFileUpload(null, { id: fileId, filePath });
       }
+    } catch (error) {
+      console.error('Failed to remove file:', error);
+      setError(`Failed to remove file: ${error.message}`);
+      addToast(`Failed to remove file: ${error.message}`, 'error');
     }
   };
 
@@ -154,7 +195,7 @@ export default function FileUploader({
             accept={acceptedTypes}
             onChange={handleChange}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-            disabled={disabled}
+            disabled={disabled || uploading}
           />
           
           <Upload className="mx-auto h-12 w-12 text-gray-400" />
@@ -188,7 +229,7 @@ export default function FileUploader({
         <div className="space-y-2">
           <h4 className="text-sm font-medium text-gray-900">Uploaded Files</h4>
           {files.map((file) => (
-            <div key={file.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+            <div key={file.id || file.name} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
               <div className="flex items-center space-x-3">
                 <FileText className="h-5 w-5 text-gray-400" />
                 <div>
@@ -199,12 +240,23 @@ export default function FileUploader({
                 </div>
               </div>
               <div className="flex items-center space-x-2">
+                {file.signedUrl && (
+                  <a 
+                    href={file.signedUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-1 text-blue-600 hover:text-blue-800 rounded"
+                    title="View file"
+                  >
+                    <LinkIcon className="h-4 w-4" />
+                  </a>
+                )}
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 {!disabled && (
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => removeFile(file.id)}
+                    onClick={() => removeFile(file.id, file.filePath)}
                     className="text-red-600 hover:text-red-700 hover:bg-red-50 p-1 h-auto"
                   >
                     <Trash2 className="h-4 w-4" />

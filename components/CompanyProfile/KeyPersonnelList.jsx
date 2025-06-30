@@ -9,12 +9,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import FileUploader from './FileUploader';
 import { Plus, Edit2, Trash2, User, Briefcase, Award, Upload } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function KeyPersonnelList({ 
   keyPersonnel = [], 
   onPersonnelChange,
   readOnly = false 
 }) {
+  const { user } = useAuth();
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingPerson, setEditingPerson] = useState(null);
   const [newPerson, setNewPerson] = useState({
@@ -64,7 +67,7 @@ export default function KeyPersonnelList({
     if (!newPerson.name.trim() || !newPerson.position.trim()) return;
     
     const person = {
-      id: Date.now(),
+      id: uuidv4(),
       ...newPerson,
       certifications: newPerson.certifications.filter(cert => cert.trim()),
       createdAt: new Date().toISOString()
@@ -233,7 +236,14 @@ export default function KeyPersonnelList({
                       <label className="text-xs text-gray-500 mb-2 block">CV/Resume</label>
                       <div className="flex items-center space-x-2">
                         <Upload className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-blue-600">{person.cv.name}</span>
+                        <a 
+                          href={person.cv.signedUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 hover:underline"
+                        >
+                          {person.cv.name}
+                        </a>
                         <span className="text-xs text-gray-500">
                           ({(person.cv.size / 1024 / 1024).toFixed(1)} MB)
                         </span>
@@ -400,13 +410,24 @@ export default function KeyPersonnelList({
                     CV/Resume Upload
                   </label>
                   <FileUploader
-                    onFileUpload={(file) => setNewPerson({
-                      ...newPerson,
-                      cv: file
-                    })}
+                    onFileUpload={(file, removedFile) => {
+                      if (file) {
+                        setNewPerson({
+                          ...newPerson,
+                          cv: file
+                        });
+                      } else if (removedFile && newPerson.cv && newPerson.cv.id === removedFile.id) {
+                        setNewPerson({
+                          ...newPerson,
+                          cv: null
+                        });
+                      }
+                    }}
                     acceptedTypes=".pdf,.doc,.docx"
                     maxSize={5}
                     existingFiles={newPerson.cv ? [newPerson.cv] : []}
+                    linkedEntity="key_personnel_cv"
+                    linkedId={editingPerson?.id || `new-personnel-${Date.now()}`}
                   />
                 </div>
 

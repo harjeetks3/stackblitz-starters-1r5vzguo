@@ -9,6 +9,8 @@ import { Badge } from '../ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import FileUploader from './FileUploader';
 import { Plus, Trash2, Upload, Calendar, Award, AlertTriangle } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { v4 as uuidv4 } from 'uuid';
 
 // Malaysia-specific certifications master list
 const MALAYSIA_CERTIFICATIONS = [
@@ -106,6 +108,7 @@ export default function CertificationsList({
   onCertificationsChange,
   readOnly = false 
 }) {
+  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showAddForm, setShowAddForm] = useState(false);
@@ -136,7 +139,7 @@ export default function CertificationsList({
   // Add certification from master list
   const addFromMasterList = (certificationName) => {
     const newCert = {
-      id: Date.now(),
+      id: uuidv4(),
       name: certificationName,
       number: '',
       issuer: '',
@@ -154,7 +157,7 @@ export default function CertificationsList({
     if (!newCertification.name.trim()) return;
     
     const cert = {
-      id: Date.now(),
+      id: uuidv4(),
       ...newCertification,
       status: 'pending'
     };
@@ -282,13 +285,22 @@ export default function CertificationsList({
                     <div className="border-t border-gray-100 pt-3">
                       <label className="text-xs text-gray-500 mb-2 block">Supporting Documents</label>
                       <FileUploader
-                        onFileUpload={(file) => {
-                          const updatedDocs = [...(cert.documents || []), file];
-                          updateCertification(cert.id, { documents: updatedDocs });
+                        onFileUpload={(file, removedFile) => {
+                          if (file) {
+                            const updatedDocs = [...(cert.documents || []), file];
+                            updateCertification(cert.id, { documents: updatedDocs });
+                          } else if (removedFile) {
+                            const updatedDocs = (cert.documents || []).filter(doc => 
+                              doc.id !== removedFile.id
+                            );
+                            updateCertification(cert.id, { documents: updatedDocs });
+                          }
                         }}
                         acceptedTypes=".pdf,.jpg,.jpeg,.png"
                         maxSize={5}
                         existingFiles={cert.documents || []}
+                        linkedEntity="company_cert"
+                        linkedId={cert.id}
                       />
                     </div>
                   )}

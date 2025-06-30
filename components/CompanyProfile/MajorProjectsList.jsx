@@ -7,13 +7,17 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { Plus, Edit2, Trash2, Building, Calendar, DollarSign, User } from 'lucide-react';
+import FileUploader from './FileUploader';
+import { Plus, Edit2, Trash2, Building, Calendar, DollarSign, User, FileText } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function MajorProjectsList({ 
   majorProjects = [], 
   onProjectsChange,
   readOnly = false 
 }) {
+  const { user } = useAuth();
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [newProject, setNewProject] = useState({
@@ -25,7 +29,8 @@ export default function MajorProjectsList({
     role: '',
     description: '',
     sector: '',
-    location: ''
+    location: '',
+    documents: []
   });
 
   const projectSectors = [
@@ -59,7 +64,7 @@ export default function MajorProjectsList({
     if (!newProject.name.trim()) return;
     
     const project = {
-      id: Date.now(),
+      id: uuidv4(),
       ...newProject,
       createdAt: new Date().toISOString()
     };
@@ -103,7 +108,8 @@ export default function MajorProjectsList({
       role: '',
       description: '',
       sector: '',
-      location: ''
+      location: '',
+      documents: []
     });
     setEditingProject(null);
     setShowAddForm(false);
@@ -112,7 +118,7 @@ export default function MajorProjectsList({
   // Format currency value
   const formatValue = (value) => {
     if (!value) return '';
-    // Simple formatting - in production you might want more sophisticated formatting
+    // Simple formatting - in production, you might want more sophisticated formatting
     return value.includes('RM') ? value : `RM ${value}`;
   };
 
@@ -209,9 +215,42 @@ export default function MajorProjectsList({
                   )}
 
                   {project.description && (
-                    <div>
+                    <div className="mb-3">
                       <label className="text-xs text-gray-500">Description</label>
                       <p className="text-sm text-gray-700 mt-1">{project.description}</p>
+                    </div>
+                  )}
+
+                  {/* Project documents */}
+                  {!readOnly && (
+                    <div className="border-t border-gray-100 pt-3">
+                      <label className="text-xs text-gray-500 mb-2 block">Project Documents</label>
+                      <FileUploader
+                        onFileUpload={(file, removedFile) => {
+                          if (file) {
+                            const updatedDocs = [...(project.documents || []), file];
+                            onProjectsChange(
+                              majorProjects.map(p => 
+                                p.id === project.id ? { ...p, documents: updatedDocs } : p
+                              )
+                            );
+                          } else if (removedFile) {
+                            const updatedDocs = (project.documents || []).filter(doc => 
+                              doc.id !== removedFile.id
+                            );
+                            onProjectsChange(
+                              majorProjects.map(p => 
+                                p.id === project.id ? { ...p, documents: updatedDocs } : p
+                              )
+                            );
+                          }
+                        }}
+                        acceptedTypes=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                        maxSize={10}
+                        existingFiles={project.documents || []}
+                        linkedEntity="project_doc"
+                        linkedId={project.id}
+                      />
                     </div>
                   )}
                 </div>
@@ -372,6 +411,37 @@ export default function MajorProjectsList({
                     placeholder="Brief description of the project scope and your role"
                   />
                 </div>
+
+                {/* Project documents upload */}
+                {editingProject && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Project Documents
+                    </label>
+                    <FileUploader
+                      onFileUpload={(file, removedFile) => {
+                        if (file) {
+                          setNewProject({
+                            ...newProject,
+                            documents: [...(newProject.documents || []), file]
+                          });
+                        } else if (removedFile) {
+                          setNewProject({
+                            ...newProject,
+                            documents: (newProject.documents || []).filter(doc => 
+                              doc.id !== removedFile.id
+                            )
+                          });
+                        }
+                      }}
+                      acceptedTypes=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                      maxSize={10}
+                      existingFiles={newProject.documents || []}
+                      linkedEntity="project_doc"
+                      linkedId={editingProject.id}
+                    />
+                  </div>
+                )}
 
                 <div className="flex justify-end space-x-3">
                   <Button variant="outline" onClick={resetForm}>
