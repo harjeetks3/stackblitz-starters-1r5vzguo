@@ -28,14 +28,11 @@ export default async function handler(req, res) {
     // Get all active tenders
     const tenders = await tenderOperations.getAll(supabase);
     
-    // Get the user ID from the auth token or use a default admin user ID
-    // This is a temporary solution until we implement proper file access control
-    const userId = process.env.SUPABASE_ADMIN_USER_ID || '00000000-0000-0000-0000-000000000000';
-    
     // Process tenders and fetch associated files
     const processedTenders = await Promise.all(tenders.map(async (tender) => {
-      // Fetch documents for each tender
-      const documents = await fileOperations.getFilesByLinkedEntity(supabase, userId, 'tender_doc', tender.id);
+      // Fetch documents explicitly for each tender
+      // We don't need to specify a user ID for tender documents as they're public
+      const documents = await fileOperations.getFilesByLinkedEntity(supabase, null, 'tender_doc', tender.id);
 
       // Transform data to match frontend expectations (snake_case to camelCase)
       return {
