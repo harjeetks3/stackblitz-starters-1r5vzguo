@@ -301,152 +301,147 @@ module.exports.tenders = [
 
 // Function to seed tenders
 async function seedTenders() {
-  console.log('Starting tender seeding process...');
-  
-  // Check if tenders already exist
-  const { data: existingTenders, error: checkError } = await supabase
-    .from('tenders')
-    .select('id')
-    .limit(1);
-  
-  if (checkError) {
-    console.error('Error checking existing tenders:', checkError);
-    process.exit(1);
-  }
-  
-  if (existingTenders && existingTenders.length > 0) {
-    console.log('Tenders already exist in the database. Skipping seeding process.');
-    process.exit(0);
-  }
+  try { // ADD THIS TRY BLOCK
+    console.log('Starting tender seeding process...');
 
-  // First, clear existing tenders and related files
-  console.log('[Seed Tenders] Clearing existing tenders and files...');
-  
-  // Get all existing tenders
-  const { data: existingTendersToDelete, error: fetchError } = await supabase
-    .from('tenders')
-    .select('id');
-    
-  if (fetchError) {
-    console.error('[Seed Tenders] Error fetching existing tenders:', fetchError);
-    process.exit(1);
-  }
-  
-  if (existingTendersToDelete && existingTendersToDelete.length > 0) {
-    // Delete all files linked to tenders
-    for (const tender of existingTendersToDelete) {
-      const { error: filesDeleteError } = await supabase
-        .from('files')
-        .delete()
-        .eq('linked_entity', 'tender_doc')
-        .eq('linked_id', tender.id);
-        
-      if (filesDeleteError) {
-        console.error(`[Seed Tenders] Error deleting files for tender ${tender.id}:`, filesDeleteError);
-      }
-    }
-    
-    // Delete all tenders
-    const { error: tendersDeleteError } = await supabase
+    // First, clear existing tenders and related files
+    console.log('[Seed Tenders] Clearing existing tenders and files...');
+
+    // Get all existing tenders
+    const { data: existingTendersToDelete, error: fetchError } = await supabase
       .from('tenders')
-      .delete()
-      .in('id', existingTendersToDelete.map(t => t.id));
-      
-    if (tendersDeleteError) {
-      console.error('[Seed Tenders] Error deleting existing tenders:', tendersDeleteError);
-      process.exit(1);
+      .select('id');
+
+    if (fetchError) {
+      console.error('[Seed Tenders] Error fetching existing tenders:', fetchError);
+      // Do not exit here, let the outer catch handle it
+      throw fetchError; // THROW THE ERROR TO BE CAUGHT BY THE OUTER TRY/CATCH
     }
-    
-    console.log(`[Seed Tenders] Cleared ${existingTendersToDelete.length} existing tenders and their files`);
-  }
 
-  // Get the admin user ID from environment variables
-  const adminUserId = process.env.SUPABASE_ADMIN_USER_ID;
+    if (existingTendersToDelete && existingTendersToDelete.length > 0) {
+      // Delete all files linked to tenders
+      for (const tender of existingTendersToDelete) {
+        const { error: filesDeleteError } = await supabase
+          .from('files')
+          .delete()
+          .eq('linked_entity', 'tender_doc')
+          .eq('linked_id', tender.id);
 
-  console.log(`[Seed Script] SUPABASE_ADMIN_USER_ID: ${adminUserId ? 'Loaded' : 'NOT LOADED'}`); // ADD THIS LINE
-  
-  if (!adminUserId) {
-    console.error('SUPABASE_ADMIN_USER_ID environment variable is not set');
-    process.exit(1);
-  }
-
-  console.log(`[Seed Tenders] Processing ${tenders.length} tenders using admin user ID: ${adminUserId}`);
-
-  // Process each tender
-  for (const tender of tenders) {
-    try {
-      console.log(`Processing tender: ${tender.title}`);
-      
-      // Validate required fields
-      if (!tender.title || !tender.description || !tender.agency) {
-        console.error('[Seed Tenders] Missing required fields for tender:', tender.title);
-        continue;
-      }
-
-      // Insert tender into database
-      const { data: tenderData, error: tenderError } = await supabase
-        .from('tenders')
-        .insert({
-          title: tender.title,
-          description: tender.description,
-          agency: tender.agency,
-          category: tender.category,
-          location: tender.location,
-          budget: tender.budget,
-          closing_date: tender.closingDate,
-          published_date: tender.publishedDate || new Date().toISOString(),
-          tender_id: tender.tenderId,
-          requirements: tender.requirements,
-          status: tender.status || 'active',
-          tags: tender.tags,
-          is_featured: tender.isFeatured || false
-        })
-        .select()
-        .single();
-
-      if (tenderError) {
-        console.error('[Seed Tenders] Error inserting tender:', tenderError);
-        continue;
-      }
-
-      console.log(`[Seed Tenders] Inserted tender: ${tenderData.title} (${tenderData.id})`);
-
-      // Process associated documents if any
-      if (tender.documents && Array.isArray(tender.documents)) {
-        for (const doc of tender.documents) {
-          // Skip if document path is not provided
-          if (!doc.path) {
-            console.warn('[Seed Tenders] Document missing path:', doc);
-            continue;
-          }
-
-          // Insert file metadata
-          const { data: fileData, error: fileError } = await supabase
-            .from('files')
-            .insert({
-              user_id: adminUserId, // Use the admin user ID for seeded documents
-              file_path: doc.path,
-              file_name: doc.name || doc.path.split('/').pop(),
-              file_size: doc.size || 0,
-              mime_type: doc.mimeType || 'application/pdf',
-              linked_entity: 'tender_doc',
-              linked_id: tenderData.id
-            })
-            .select()
-            .single();
-
-          if (fileError) {
-            console.error('[Seed Tenders] Error inserting file metadata:', fileError);
-            continue;
-          }
-
-          console.log(`[Seed Tenders] Linked document: ${fileData.file_name} to tender ${tenderData.id}`);
+        if (filesDeleteError) {
+          console.error(`[Seed Tenders] Error deleting files for tender ${tender.id}:`, filesDeleteError);
+          // Do not exit here
         }
       }
-    } catch (error) {
-      console.error(`Error processing tender "${tender.title}":`, error);
+
+      // Delete all tenders
+      const { error: tendersDeleteError } = await supabase
+        .from('tenders')
+        .delete()
+        .in('id', existingTendersToDelete.map(t => t.id));
+
+      if (tendersDeleteError) {
+        console.error('[Seed Tenders] Error deleting existing tenders:', tendersDeleteError);
+        // Do not exit here
+        throw tendersDeleteError; // THROW THE ERROR TO BE CAUGHT BY THE OUTER TRY/CATCH
+      }
+
+      console.log(`[Seed Tenders] Cleared ${existingTendersToDelete.length} existing tenders and their files`);
     }
+
+    // Get the admin user ID from environment variables
+    const adminUserId = process.env.SUPABASE_ADMIN_USER_ID;
+
+    console.log(`[Seed Script] SUPABASE_ADMIN_USER_ID: ${adminUserId ? 'Loaded' : 'NOT LOADED'}`); // THIS LINE IS ALREADY THERE
+
+    if (!adminUserId) {
+      console.error('SUPABASE_ADMIN_USER_ID environment variable is not set');
+      throw new Error('SUPABASE_ADMIN_USER_ID is required for seeding documents.'); // THROW A NEW ERROR
+    }
+
+    console.log(`[Seed Tenders] Processing ${module.exports.tenders.length} tenders using admin user ID: ${adminUserId}`);
+
+    // Process each tender
+    for (const tender of module.exports.tenders) { // Use module.exports.tenders here
+      try {
+        console.log(`Processing tender: ${tender.title}`);
+
+        // Validate required fields
+        if (!tender.title || !tender.description || !tender.agency) {
+          console.error('[Seed Tenders] Missing required fields for tender:', tender.title);
+          continue;
+        }
+
+        // Insert tender into database
+        const { data: tenderData, error: tenderError } = await supabase
+          .from('tenders')
+          .insert({
+            title: tender.title,
+            description: tender.description,
+            agency: tender.agency,
+            category: tender.category,
+            location: tender.location,
+            budget: tender.budget,
+            closing_date: tender.closingDate,
+            published_date: tender.publishedDate || new Date().toISOString(),
+            tender_id: tender.tenderId,
+            requirements: tender.requirements,
+            status: tender.status || 'active',
+            tags: tender.tags,
+            is_featured: tender.isFeatured || false
+          })
+          .select()
+          .single();
+
+        if (tenderError) {
+          console.error('[Seed Tenders] Error inserting tender:', tenderError);
+          continue;
+        }
+
+        console.log(`[Seed Tenders] Inserted tender: ${tenderData.title} (${tenderData.id})`);
+
+        // Process associated documents if any
+        if (tender.documents && Array.isArray(tender.documents)) {
+          for (const doc of tender.documents) {
+            // Skip if document path is not provided
+            if (!doc.path) {
+              console.warn('[Seed Tenders] Document missing path:', doc);
+              continue;
+            }
+
+            // Insert file metadata
+            const { data: fileData, error: fileError } = await supabase
+              .from('files')
+              .insert({
+                user_id: adminUserId, // Use the admin user ID for seeded documents
+                file_path: doc.path,
+                file_name: doc.name || doc.path.split('/').pop(),
+                file_size: doc.size || 0,
+                mime_type: doc.mimeType || 'application/pdf',
+                linked_entity: 'tender_doc',
+                linked_id: tenderData.id
+              })
+              .select()
+              .single();
+
+            if (fileError) {
+              console.error('[Seed Tenders] Error inserting file metadata:', fileError);
+              continue;
+            }
+
+            console.log(`[Seed Tenders] Linked document: ${fileData.file_name} to tender ${tenderData.id}`);
+          }
+        }
+      } catch (tenderProcessingError) { // Catch errors for individual tenders
+        console.error(`[Seed Tenders] Error processing tender "${tender.title}":`, tenderProcessingError);
+      }
+    }
+
+    console.log('Tender seeding process completed successfully!');
+  } catch (error) { // CATCH BLOCK FOR THE ENTIRE FUNCTION
+    console.error('An unexpected error occurred during seeding:', error);
+    process.exit(1); // Exit with an error code
   }
-  
-  console.log('Tender seeding process completed successfully!');
 }
+
+// Run the seed function
+seedTenders(); // CALL THE ASYNC FUNCTION
