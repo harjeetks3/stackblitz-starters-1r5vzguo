@@ -11,6 +11,9 @@ console.log('[Seed Script] Script started.'); // ADD THIS LINE
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+console.log(`[Seed Script] SUPABASE_URL: ${supabaseUrl ? 'Loaded' : 'NOT LOADED'}`); // ADD THIS LINE
+console.log(`[Seed Script] SUPABASE_SERVICE_ROLE_KEY: ${serviceRoleKey ? 'Loaded' : 'NOT LOADED'}`); // ADD THIS LINE
+
 if (!supabaseUrl || !serviceRoleKey) {
   console.error('Missing Supabase environment variables');
   process.exit(1);
