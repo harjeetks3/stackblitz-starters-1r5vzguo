@@ -354,7 +354,7 @@ async function seedTenders() {
           const { data: fileData, error: fileError } = await supabase
             .from('files')
             .insert({
-              user_id: 'scraper', // Use 'scraper' as the user_id for seeded documents
+              user_id: process.env.SUPABASE_SEED_USER_ID, // should be set to the UUID of an authenticated user.
               file_path: doc.path,
               file_name: doc.name,
               file_size: doc.size,
