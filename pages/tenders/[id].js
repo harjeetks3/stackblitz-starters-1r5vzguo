@@ -254,12 +254,8 @@ export default function TenderDetails() {
                     )}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {tender.category && <Badge variant="outline">{tender.category}</Badge>}
-                    }
-                    
+                    {tender.category && <Badge variant="outline">{tender.category}</Badge>} 
                     {tender.isNew && <Badge variant="outline">Featured</Badge>}
-                    }
-                    
                     {tender.tags && tender.tags.map(tag => (
                       <Badge key={tag} variant="outline">{tag}</Badge>
                     ))}
