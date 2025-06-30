@@ -18,7 +18,7 @@ if (!supabaseUrl || !serviceRoleKey) {
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 
 // Sample tender data
-const tenders = [
+module.exports.tenders = [
 // tender #1
 {
   "title": "ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS (OKT) AT KAMPUNG SELAMAT REMAN DETENTION CENTRE, NATIONAL ANTI-DRUG AGENCY OF MALAYSIA, PENANG STATE",
@@ -382,9 +382,3 @@ async function seedTenders() {
   console.log('Tender seeding process completed successfully!');
 }
 
-// Run the seeding function
-seedTenders()
-  .catch(error => {
-    console.error('Error in seed script:', error);
-    process.exit(1);
-  });
