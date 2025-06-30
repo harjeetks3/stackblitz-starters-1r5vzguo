@@ -30,9 +30,55 @@ export default async function handler(req, res) {
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
+    // First, clear existing tenders and related files
+    console.log('[Seed Tenders] Clearing existing tenders and files...');
+    
+    // Get all existing tenders
+    const { data: existingTenders, error: fetchError } = await supabase
+      .from('tenders')
+      .select('id');
+      
+    if (fetchError) {
+      console.error('[Seed Tenders] Error fetching existing tenders:', fetchError);
+      return res.status(500).json({ error: 'Failed to fetch existing tenders' });
+    }
+    
+    if (existingTenders && existingTenders.length > 0) {
+      // Delete all files linked to tenders
+      for (const tender of existingTenders) {
+        const { error: filesDeleteError } = await supabase
+          .from('files')
+          .delete()
+          .eq('linked_entity', 'tender_doc')
+          .eq('linked_id', tender.id);
+          
+        if (filesDeleteError) {
+          console.error(`[Seed Tenders] Error deleting files for tender ${tender.id}:`, filesDeleteError);
+        }
+      }
+      
+      // Delete all tenders
+      const { error: tendersDeleteError } = await supabase
+        .from('tenders')
+        .delete()
+        .in('id', existingTenders.map(t => t.id));
+        
+      if (tendersDeleteError) {
+        console.error('[Seed Tenders] Error deleting existing tenders:', tendersDeleteError);
+        return res.status(500).json({ error: 'Failed to delete existing tenders' });
+      }
+      
+      console.log(`[Seed Tenders] Cleared ${existingTenders.length} existing tenders and their files`);
+    }
+
     console.log(`[Seed Tenders] Processing ${tenders.length} tenders`);
 
     const results = [];
+    const userId = process.env.SUPABASE_ADMIN_USER_ID || process.env.SUPABASE_SEED_USER_ID;
+    
+    if (!userId) {
+      return res.status(500).json({ error: 'SUPABASE_ADMIN_USER_ID or SUPABASE_SEED_USER_ID must be set in .env.local' });
+    }
 
     // Process each tender
     for (const tender of tenders) {
@@ -94,7 +140,7 @@ export default async function handler(req, res) {
             const { data: fileData, error: fileError } = await supabase
               .from('files')
               .insert({
-                user_id: 'scraper', // Use scraper as default user_id for seeded documents
+                user_id: userId, // Use the admin user ID for seeded documents
                 file_path: doc.path,
                 file_name: doc.name || doc.path.split('/').pop(),
                 file_size: doc.size || 0,

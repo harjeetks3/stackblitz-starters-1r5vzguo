@@ -232,6 +232,7 @@ export default function TenderFeed() {
           {/* More Filters Button and Popup */}
           <div className="relative" ref={moreFiltersRef}>
             <Button 
+              type="button"
               variant="outline" 
               className="flex items-center space-x-2"
               onClick={() => setShowMoreFilters(!showMoreFilters)}
@@ -241,10 +242,11 @@ export default function TenderFeed() {
             </Button>
 
             {showMoreFilters && (
-              <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-10 p-4">
+              <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-sm font-medium text-gray-900">Advanced Filters</h4>
                   <Button 
+                    type="button"
                     variant="ghost" 
                     size="sm" 
                     className="h-6 w-6 p-0" 
@@ -318,6 +320,7 @@ export default function TenderFeed() {
                   {/* Action Buttons */}
                   <div className="flex justify-between pt-2">
                     <Button 
+                      type="button"
                       variant="outline" 
                       size="sm"
                       onClick={resetFilters}
@@ -325,6 +328,7 @@ export default function TenderFeed() {
                       Reset All
                     </Button>
                     <Button 
+                      type="button"
                       size="sm"
                       onClick={applyAdvancedFilters}
                     >
@@ -391,6 +395,7 @@ export default function TenderFeed() {
             Try adjusting your search criteria or filters to find more opportunities.
           </p>
           <Button 
+            type="button"
             variant="outline"
             onClick={resetFilters}
           >

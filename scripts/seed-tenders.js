@@ -380,4 +380,3 @@ async function seedTenders() {
   
   console.log('Tender seeding process completed successfully!');
 }
-
