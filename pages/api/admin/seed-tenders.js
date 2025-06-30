@@ -3,6 +3,7 @@
 // This is a one-time use endpoint for populating the database with initial tender data
 
 import { createClient } from '@supabase/supabase-js';
+import { tenders } from '../../../scripts/seed-tenders';
 import { v4 as uuidv4 } from 'uuid';
 
 export default async function handler(req, res) {
@@ -28,12 +29,6 @@ export default async function handler(req, res) {
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
-
-    const { tenders } = req.body;
-
-    if (!tenders || !Array.isArray(tenders) || tenders.length === 0) {
-      return res.status(400).json({ error: 'No tenders provided' });
-    }
 
     console.log(`[Seed Tenders] Processing ${tenders.length} tenders`);
 
@@ -99,7 +94,7 @@ export default async function handler(req, res) {
             const { data: fileData, error: fileError } = await supabase
               .from('files')
               .insert({
-                user_id: doc.userId || 'scraper', // Use scraper as default user_id for seeded documents
+                user_id: 'scraper', // Use scraper as default user_id for seeded documents
                 file_path: doc.path,
                 file_name: doc.name || doc.path.split('/').pop(),
                 file_size: doc.size || 0,

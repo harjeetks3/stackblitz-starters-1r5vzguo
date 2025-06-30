@@ -46,16 +46,16 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
       // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000013773/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000013773/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Jadual_Kekerapan.pdf",                path: "scraper/QT250000000013773/03_Jadual_Kekerapan.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "05_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000013773/05_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "06_Spesifikasi.pdf",                     path: "scraper/QT250000000013773/06_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000013773/07_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000013773/08_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "09_Sampel_Surat_Setuju_Terima.pdf",           path: "scraper/QT250000000013773/09_Sampel_Surat_Setuju_Terima.pdf",           size: 0, mimeType: "application/pdf" },
-      { name: "10_9_MAKLUMAT_HARGA_DAN_PEMARKAHAN_PENILAIAN_TENDER_AADK_PULAU_PINANG_FINAL.pdf", path: "scraper/QT250000000013773/10_9_MAKLUMAT_HARGA_DAN_PEMARKAHAN_PENILAIAN_TENDER_AADK_PULAU_PINANG_FINAL.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS.docx", path: "scraper/QT250000000013773/ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS.docx", size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000013773/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 492229, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000013773/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 88202, mimeType: "application/pdf" },
+      { name: "03_Jadual_Kekerapan.pdf",                path: "scraper/QT250000000013773/03_Jadual_Kekerapan.pdf",                size: 64267, mimeType: "application/pdf" },
+      { name: "05_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000013773/05_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 40302, mimeType: "application/pdf" },
+      { name: "06_Spesifikasi.pdf",                     path: "scraper/QT250000000013773/06_Spesifikasi.pdf",                     size: 73220, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000013773/07_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 50007, mimeType: "application/pdf" },
+      { name: "08_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000013773/08_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 63795, mimeType: "application/pdf" },
+      { name: "09_Sampel_Surat_Setuju_Terima.pdf",           path: "scraper/QT250000000013773/09_Sampel_Surat_Setuju_Terima.pdf",           size: 152928, mimeType: "application/pdf" },
+      { name: "10_9_MAKLUMAT_HARGA_DAN_PEMARKAHAN_PENILAIAN_TENDER_AADK_PULAU_PINANG_FINAL.pdf", path: "scraper/QT250000000013773/10_9_MAKLUMAT_HARGA_DAN_PEMARKAHAN_PENILAIAN_TENDER_AADK_PULAU_PINANG_FINAL.pdf", size: 25206, mimeType: "application/pdf" },
+      { name: "ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS.docx", path: "scraper/QT250000000013773/ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS.docx", size: 15076, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
 },
 
@@ -85,15 +85,15 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
       // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000020666/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000020666/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000020666/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000020666/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000020666/05_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000020666/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000020666/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000020666/08_Sampel_Surat_Setuju_Terima.pdf",      size: 0, mimeType: "application/pdf" },
-      { name: "INK .docx",                              path: "scraper/QT250000000020666/INK .docx",                              size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000020666/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 495381, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000020666/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 88679, mimeType: "application/pdf" },
+      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000020666/03_Delivery_Address.pdf",                size: 50236, mimeType: "application/pdf" },
+      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000020666/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 7565, mimeType: "application/pdf" },
+      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000020666/05_Spesifikasi.pdf",                     size: 81145, mimeType: "application/pdf" },
+      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000020666/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 47943, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000020666/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 61832, mimeType: "application/pdf" },
+      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000020666/08_Sampel_Surat_Setuju_Terima.pdf",      size: 152884, mimeType: "application/pdf" },
+      { name: "INK .docx",                              path: "scraper/QT250000000020666/INK .docx",                              size: 16723, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
 },
 
@@ -123,15 +123,15 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
   // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-  { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021042/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021042/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021042/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000021042/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000021042/05_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000021042/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000021042/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000021042/08_Sampel_Surat_Setuju_Terima.pdf",      size: 0, mimeType: "application/pdf" },
-      { name: "Dental Technologist Workstation.docx",   path: "scraper/QT250000000021042/Dental Technologist Workstation.docx",   size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+  { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021042/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 496478, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021042/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 88785, mimeType: "application/pdf" },
+      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021042/03_Delivery_Address.pdf",                size: 49673, mimeType: "application/pdf" },
+      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000021042/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 7560, mimeType: "application/pdf" },
+      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000021042/05_Spesifikasi.pdf",                     size: 69959, mimeType: "application/pdf" },
+      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000021042/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 54176, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000021042/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 63266, mimeType: "application/pdf" },
+      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000021042/08_Sampel_Surat_Setuju_Terima.pdf",      size: 152997, mimeType: "application/pdf" },
+      { name: "Dental Technologist Workstation.docx",   path: "scraper/QT250000000021042/Dental Technologist Workstation.docx",   size: 17567, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
   },
 
@@ -162,15 +162,15 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
       // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021826/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021826/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021826/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000021826/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000021826/05_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000021826/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000021826/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000021826/08_Sampel_Surat_Setuju_Terima.pdf",      size: 0, mimeType: "application/pdf" },
-      { name: "QUOTATION FOR SUPPLY, DELIVERY, INSTALLATION, TESTING AND COMMISSIONING OF EQUIPMENT FOR BAKERY WORKSHOPS AND SEQUENCE WORKSHOPS.docx", path: "scraper/QT250000000021826/QUOTATION FOR SUPPLY, DELIVERY, INSTALLATION, TESTING AND COMMISSIONING OF EQUIPMENT FOR BAKERY WORKSHOPS AND SEQUENCE WORKSHOPS.docx", size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021826/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 496835, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021826/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 88810, mimeType: "application/pdf" },
+      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021826/03_Delivery_Address.pdf",                size: 47874, mimeType: "application/pdf" },
+      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000021826/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 7560, mimeType: "application/pdf" },
+      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000021826/05_Spesifikasi.pdf",                     size: 87836, mimeType: "application/pdf" },
+      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000021826/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 53010, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000021826/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 66247, mimeType: "application/pdf" },
+      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000021826/08_Sampel_Surat_Setuju_Terima.pdf",      size: 153387, mimeType: "application/pdf" },
+      { name: "QUOTATION FOR SUPPLY, DELIVERY, INSTALLATION, TESTING AND COMMISSIONING OF EQUIPMENT FOR BAKERY WORKSHOPS AND SEQUENCE WORKSHOPS.docx", path: "scraper/QT250000000021826/QUOTATION FOR SUPPLY, DELIVERY, INSTALLATION, TESTING AND COMMISSIONING OF EQUIPMENT FOR BAKERY WORKSHOPS AND SEQUENCE WORKSHOPS.docx", size: 18194, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
   },
 
@@ -203,16 +203,16 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
       // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000017045/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000017045/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000017045/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000017045/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000017045/05_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000017045/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000017045/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000017045/08_Sampel_Surat_Setuju_Terima.pdf",      size: 0, mimeType: "application/pdf" },
-      { name: "09_8_Syarat-syarat_Tambahan.pdf",        path: "scraper/QT250000000017045/09_8_Syarat-syarat_Tambahan.pdf",        size: 0, mimeType: "application/pdf" },
-      { name: "Portable Radionuclide Detector.docx",    path: "scraper/QT250000000017045/Portable Radionuclide Detector.docx",    size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000017045/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 493860, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000017045/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 88746, mimeType: "application/pdf" },
+      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000017045/03_Delivery_Address.pdf",                size: 49684, mimeType: "application/pdf" },
+      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000017045/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 7560, mimeType: "application/pdf" },
+      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000017045/05_Spesifikasi.pdf",                     size: 82468, mimeType: "application/pdf" },
+      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000017045/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 50938, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000017045/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 63255, mimeType: "application/pdf" },
+      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000017045/08_Sampel_Surat_Setuju_Terima.pdf",      size: 152711, mimeType: "application/pdf" },
+      { name: "09_8_Syarat-syarat_Tambahan.pdf",        path: "scraper/QT250000000017045/09_8_Syarat-syarat_Tambahan.pdf",        size: 475430, mimeType: "application/pdf" },
+      { name: "Portable Radionuclide Detector.docx",    path: "scraper/QT250000000017045/Portable Radionuclide Detector.docx",    size: 16444, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
   },
 
@@ -243,16 +243,16 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
       // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000019695/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000019695/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000019695/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000019695/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000019695/05_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000019695/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000019695/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000019695/08_Sampel_Surat_Setuju_Terima.pdf",      size: 0, mimeType: "application/pdf" },
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000019695/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 496020, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000019695/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 89368, mimeType: "application/pdf" },
+      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000019695/03_Delivery_Address.pdf",                size: 50989, mimeType: "application/pdf" },
+      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000019695/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 7560, mimeType: "application/pdf" },
+      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000019695/05_Spesifikasi.pdf",                     size: 86824, mimeType: "application/pdf" },
+      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000019695/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 57581, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000019695/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 61012, mimeType: "application/pdf" },
+      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000019695/08_Sampel_Surat_Setuju_Terima.pdf",      size: 152797, mimeType: "application/pdf" },
       { name: "09_8_Syarat-syarat_Tambahan.pdf",        path: "scraper/QT250000000019695/09_8_Syarat-syarat_Tambahan.pdf",        size: 0, mimeType: "application/pdf" },
-      { name: "WEB APPLICATION FIREWALL (WAF) SERVICE.docx", path: "scraper/QT250000000019695/WEB APPLICATION FIREWALL (WAF) SERVICE.docx", size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+      { name: "WEB APPLICATION FIREWALL (WAF) SERVICE.docx", path: "scraper/QT250000000019695/WEB APPLICATION FIREWALL (WAF) SERVICE.docx", size: 16938, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
   },
 
@@ -281,15 +281,15 @@ module.exports.tenders = [
   "isFeatured": false,
   documents: [
       // NOTE: Update size: 0 with actual file sizes in bytes for all documents
-      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000018131/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000018131/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
-      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000018131/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
-      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000018131/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000018131/05_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
-      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000018131/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000018131/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000018131/08_Sampel_Surat_Setuju_Terima.pdf",      size: 0, mimeType: "application/pdf" },
-      { name: "SUPPLY SUPPORT SOFTWARE.docx",           path: "scraper/QT250000000018131/SUPPLY SUPPORT SOFTWARE.docx",           size: 0, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000018131/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 500039, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000018131/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 87964, mimeType: "application/pdf" },
+      { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000018131/03_Delivery_Address.pdf",                size: 54096, mimeType: "application/pdf" },
+      { name: "04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000018131/04_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 7560, mimeType: "application/pdf" },
+      { name: "05_Spesifikasi.pdf",                     path: "scraper/QT250000000018131/05_Spesifikasi.pdf",                     size: 63851, mimeType: "application/pdf" },
+      { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000018131/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 54088, mimeType: "application/pdf" },
+      { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000018131/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 61325, mimeType: "application/pdf" },
+      { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000018131/08_Sampel_Surat_Setuju_Terima.pdf",      size: 152732, mimeType: "application/pdf" },
+      { name: "SUPPLY SUPPORT SOFTWARE.docx",           path: "scraper/QT250000000018131/SUPPLY SUPPORT SOFTWARE.docx",           size: 16582, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
   }
 ];
