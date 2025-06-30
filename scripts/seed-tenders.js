@@ -362,6 +362,8 @@ async function seedTenders() {
 
   // Get the admin user ID from environment variables
   const adminUserId = process.env.SUPABASE_ADMIN_USER_ID;
+
+  console.log(`[Seed Script] SUPABASE_ADMIN_USER_ID: ${adminUserId ? 'Loaded' : 'NOT LOADED'}`); // ADD THIS LINE
   
   if (!adminUserId) {
     console.error('SUPABASE_ADMIN_USER_ID environment variable is not set');
