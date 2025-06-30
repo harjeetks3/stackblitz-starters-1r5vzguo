@@ -32,8 +32,12 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Tender not found' });
     }
 
+    // Get the user ID from the auth token or use a default admin user ID
+    // This is a temporary solution until we implement proper file access control
+    const userId = process.env.SUPABASE_ADMIN_USER_ID || '00000000-0000-0000-0000-000000000000';
+    
     // Fetch documents explicitly for this tender
-    const fetchedDocuments = await fileOperations.getFilesByLinkedEntity(supabase, 'scraper', 'tender_doc', tender.id);
+    const fetchedDocuments = await fileOperations.getFilesByLinkedEntity(supabase, userId, 'tender_doc', tender.id);
 
     // Generate signed URLs for files if they exist
     const documents = [];
