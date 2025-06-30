@@ -2,7 +2,7 @@
 // API endpoint for listing all active tenders from Supabase database
 
 import { createClient } from '@supabase/supabase-js';
-import { tenderOperations } from '../../../lib/database';
+import { tenderOperations, fileOperations } from '../../../lib/database';
 
 export default async function handler(req, res) {
   // Only allow GET requests
@@ -28,19 +28,10 @@ export default async function handler(req, res) {
     // Get all active tenders
     const tenders = await tenderOperations.getAll(supabase);
     
-    // Process files for each tender
-    const processedTenders = tenders.map(tender => {
-      // Generate signed URLs for files if they exist
-      const documents = tender.files && tender.files.length > 0 
-        ? tender.files.map(file => ({
-            id: file.id,
-            name: file.file_name,
-            size: file.file_size,
-            type: file.mime_type,
-            path: file.file_path,
-            // We'll generate signed URLs on demand in the frontend to avoid generating too many at once
-          }))
-        : [];
+    // Process tenders and fetch associated files
+    const processedTenders = await Promise.all(tenders.map(async (tender) => {
+      // Fetch documents explicitly for each tender
+      const documents = await fileOperations.getFilesByLinkedEntity(supabase, 'scraper', 'tender_doc', tender.id);
 
       // Transform data to match frontend expectations (snake_case to camelCase)
       return {
@@ -55,7 +46,14 @@ export default async function handler(req, res) {
         publishedDate: tender.published_date,
         tenderId: tender.tender_id,
         requirements: tender.requirements,
-        documents: documents,
+        documents: documents.map(file => ({
+          id: file.id,
+          name: file.file_name,
+          size: file.file_size,
+          type: file.mime_type,
+          path: file.file_path,
+          // signedUrl is generated on demand in the frontend for list view
+        })),
         contactInfo: tender.contact_info,
         status: tender.status,
         tags: tender.tags,
@@ -63,7 +61,7 @@ export default async function handler(req, res) {
         createdAt: tender.created_at,
         updatedAt: tender.updated_at
       };
-    });
+    }));
 
     res.status(200).json(processedTenders);
   } catch (error) {

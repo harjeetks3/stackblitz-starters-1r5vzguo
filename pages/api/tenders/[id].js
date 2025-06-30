@@ -2,7 +2,7 @@
 // API endpoint for fetching a specific tender by ID from Supabase database
 
 import { createClient } from '@supabase/supabase-js';
-import { tenderOperations } from '../../../lib/database';
+import { tenderOperations, fileOperations } from '../../../lib/database';
 
 export default async function handler(req, res) {
   // Only allow GET requests
@@ -32,10 +32,13 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Tender not found' });
     }
 
+    // Fetch documents explicitly for this tender
+    const fetchedDocuments = await fileOperations.getFilesByLinkedEntity(supabase, 'scraper', 'tender_doc', tender.id);
+
     // Generate signed URLs for files if they exist
     const documents = [];
-    if (tender.files && tender.files.length > 0) {
-      for (const file of tender.files) {
+    if (fetchedDocuments && fetchedDocuments.length > 0) {
+      for (const file of fetchedDocuments) {
         try {
           const { data } = await supabase.storage
             .from('documents')
