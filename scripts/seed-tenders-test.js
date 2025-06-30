@@ -19,8 +19,6 @@ const supabase = createClient(supabaseUrl, serviceRoleKey);
 
 // Sample tender data
 const tenders = [
-
-
 // tender #1
 {
   "title": "ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS (OKT) AT KAMPUNG SELAMAT REMAN DETENTION CENTRE, NATIONAL ANTI-DRUG AGENCY OF MALAYSIA, PENANG STATE",
@@ -121,6 +119,7 @@ const tenders = [
   "status": "active",
   "tags": ["Dental", "Medical Equipment", "Kedah"],
   "isFeatured": false,
+  documents: [
   { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021042/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021042/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021042/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
@@ -171,7 +170,6 @@ const tenders = [
     ]
   },
 
-
 // tender #5
 {
   "title": "SUPPLY, DELIVERY, TESTING AND COMMISSIONING ONE (1) PORTABLE RADIONUCLIDE DETECTOR – SH.82/2025",
@@ -213,7 +211,6 @@ const tenders = [
     ]
   },
 
-
 // tender #6
 {
   "title": "WEB APPLICATION FIREWALL (WAF) SERVICE FOR A PERIOD OF THREE (3) YEARS AT THE HEADQUARTERS OF THE FIRE AND RESCUE DEPARTMENT OF MALAYSIA (JBPM) 2025-2028",
@@ -253,7 +250,6 @@ const tenders = [
     ]
   },
 
-
 // tender #7
 {
   "title": "SUPPLY OF SUPPORT SOFTWARE FOR THE BIOMETRIC DEVELOPMENT PROGRAMME FOR LAND-USE AND FOREST CONSERVATION IN SABAH",
@@ -290,8 +286,6 @@ const tenders = [
     ]
   }
 ];
-
-
 
 
 // Function to seed tenders
