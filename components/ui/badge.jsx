@@ -28,5 +28,4 @@ const Badge = ({ className, variant, ...props }) => {
   );
 };
 
-export default Badge;
-export { badgeVariants };
+export { Badge, badgeVariants };

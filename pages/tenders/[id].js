@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { fetcher, api } from '../../lib/api';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import Badge from '../../components/ui/badge';
+import { Badge } from '../../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import TranslationButton from '../../components/Translation/TranslationButton';
 import { useToast } from '../../hooks/useToast';
@@ -255,11 +255,7 @@ export default function TenderDetails() {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {tender.category && <Badge variant="outline">{tender.category}</Badge>}
-                    }
-                    
                     {tender.isNew && <Badge variant="outline">Featured</Badge>}
-                    }
-                    
                     {tender.tags && tender.tags.map(tag => (
                       <Badge key={tag} variant="outline">{tag}</Badge>
                     ))}

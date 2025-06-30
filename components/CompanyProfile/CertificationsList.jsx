@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import Badge from "../ui/badge";
+import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import FileUploader from './FileUploader';
 import { Plus, Trash2, Upload, Calendar, Award, AlertTriangle } from 'lucide-react';
