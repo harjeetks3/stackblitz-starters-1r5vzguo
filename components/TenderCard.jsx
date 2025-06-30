@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { CalendarIcon, BuildingOfficeIcon, CheckCircleIcon, XCircleIcon, ShieldIcon } from '@heroicons/react/24/outline';
 import { Badge } from './ui/badge';
 
-const TenderCard = ({ tender, eligibilitySummary }) => {
+export const TenderCard = ({ tender, eligibilitySummary }) => {
   const { id, title, agency, closingDate, category, isNew } = tender;
   
   // Calculate days until closing date
@@ -110,5 +110,3 @@ const TenderCard = ({ tender, eligibilitySummary }) => {
     </Link>
   );
 };
-
-export const TenderCard = ({ tender, eligibilitySummary }) => { ... };
