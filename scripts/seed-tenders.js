@@ -23,7 +23,7 @@ const tenders = [
 {
   "title": "ISLAMIC COOKED FOOD PREPARATION AND SUPPLY SERVICES TO DETENTIONS (OKT) AT KAMPUNG SELAMAT REMAN DETENTION CENTRE, NATIONAL ANTI-DRUG AGENCY OF MALAYSIA, PENANG STATE",
   "agency": "NATIONAL ANTI-DRUG AGENCY (AADK) – MINISTRY OF INTERIOR",
-  "description": "Two-year contract (24 months) to cook, package, and deliver halal meals—breakfast, lunch, tea, and dinner—for approximately 71 detainees daily at the Kampung Selamat Reman Detention Centre, Penang.  Menu cycles, nutritional portions, hygiene standards, delivery frequency, and service KPIs are defined in the tender’s Spesifikasi and Jadual Kekerapan.  Strict compliance with Islamic dietary rules, food-safety regulations, and AADK security protocols is mandatory.  Tender includes supply of ingredients, labour, transport, and on-site service supervisors.",
+  "description": "Two-year contract (24 months) to cook, package, and deliver halal meals—breakfast, lunch, tea, and dinner—for approximately 71 detainees daily at the Kampung Selamat Reman Detention Centre, Penang.  Menu cycles, nutritional portions, hygiene standards, delivery frequency, and service KPIs are defined in the tender's Spesifikasi and Jadual Kekerapan.  Strict compliance with Islamic dietary rules, food-safety regulations, and AADK security protocols is mandatory.  Tender includes supply of ingredients, labour, transport, and on-site service supervisors.",
   "category": "Food & Catering Services",
   "location": "Penang, Malaysia",
   "budget": "RM 779,580.00 (departmental indicative price)",
@@ -45,11 +45,12 @@ const tenders = [
   "tags": ["Halal Catering", "Detention Centre", "Government Tender"],
   "isFeatured": false,
   documents: [
-      { name: "01_Kenyataan_Tawaran_Pembekal.pdf",           path: "scraper/QT250000000013773/01_Kenyataan_Tawaran_Pembekal.pdf",           size: 0, mimeType: "application/pdf" },
-      { name: "02_Sampel_Surat_Akuan_Pembida.pdf",           path: "scraper/QT250000000013773/02_Sampel_Surat_Akuan_Pembida.pdf",           size: 0, mimeType: "application/pdf" },
-      { name: "03_Jadual_Kekerapan.pdf",                     path: "scraper/QT250000000013773/03_Jadual_Kekerapan.pdf",                     size: 0, mimeType: "application/pdf" },
+      // NOTE: Update size: 0 with actual file sizes in bytes for all documents
+      { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000013773/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
+      { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000013773/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
+      { name: "03_Jadual_Kekerapan.pdf",                path: "scraper/QT250000000013773/03_Jadual_Kekerapan.pdf",                size: 0, mimeType: "application/pdf" },
       { name: "05_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", path: "scraper/QT250000000013773/05_Syarat_Syarat_Am_Arahan_Syarat_Syarat_Khas.pdf", size: 0, mimeType: "application/pdf" },
-      { name: "06_Spesifikasi.pdf",                          path: "scraper/QT250000000013773/06_Spesifikasi.pdf",                          size: 0, mimeType: "application/pdf" },
+      { name: "06_Spesifikasi.pdf",                     path: "scraper/QT250000000013773/06_Spesifikasi.pdf",                     size: 0, mimeType: "application/pdf" },
       { name: "07_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000013773/07_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 0, mimeType: "application/pdf" },
       { name: "08_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000013773/08_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 0, mimeType: "application/pdf" },
       { name: "09_Sampel_Surat_Setuju_Terima.pdf",           path: "scraper/QT250000000013773/09_Sampel_Surat_Setuju_Terima.pdf",           size: 0, mimeType: "application/pdf" },
@@ -83,6 +84,7 @@ const tenders = [
   "tags": ["Office Supplies", "Toner & Ink", "Government Quotation"],
   "isFeatured": false,
   documents: [
+      // NOTE: Update size: 0 with actual file sizes in bytes for all documents
       { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000020666/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000020666/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000020666/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
@@ -120,6 +122,7 @@ const tenders = [
   "tags": ["Dental", "Medical Equipment", "Kedah"],
   "isFeatured": false,
   documents: [
+  // NOTE: Update size: 0 with actual file sizes in bytes for all documents
   { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021042/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021042/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021042/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
@@ -158,6 +161,7 @@ const tenders = [
   "tags": ["Vocational", "Bakery Equipment", "Special Education"],
   "isFeatured": false,
   documents: [
+      // NOTE: Update size: 0 with actual file sizes in bytes for all documents
       { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000021826/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000021826/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000021826/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
@@ -198,6 +202,7 @@ const tenders = [
   "tags": ["Radiation Detection", "Science", "Security Equipment"],
   "isFeatured": false,
   documents: [
+      // NOTE: Update size: 0 with actual file sizes in bytes for all documents
       { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000017045/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000017045/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000017045/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
@@ -226,10 +231,10 @@ const tenders = [
     "Supplier status: Open",
     "Field codes 210104 & 210107 – ICT Security / Firewall, Encryption, PKI, Anti-Virus",
     "Offer validity: 90 days (expires 2025-10-07)",
-    "Delivery/Service address: IT Branch, 4th Floor HQ JBPM, Lebuh Wawasan, Presint 7 (see 03_Delivery_Address.pdf) :contentReference[oaicite:5]{index=5}",
-    "Technical spec: 1 Gbps WAAP virtual appliance ×2, Analyzer V2 reporting VM, active-standby + active-active modes, full OWASP protection list (see 05_Spesifikasi.pdf) :contentReference[oaicite:6]{index=6}",
+    "Delivery/Service address: IT Branch, 4th Floor HQ JBPM, Lebuh Wawasan, Presint 7 (see 03_Delivery_Address.pdf)",
+    "Technical spec: 1 Gbps WAAP virtual appliance ×2, Analyzer V2 reporting VM, active-standby + active-active modes, full OWASP protection list (see 05_Spesifikasi.pdf)",
     "Upload completed Technical & Financial checklists (06_ & 07_) ",
-    "Adhere to General & Special Conditions in 04_Syarat_Syarat_Am_….pdf :contentReference[oaicite:7]{index=7}",
+    "Adhere to General & Special Conditions in 04_Syarat_Syarat_Am_….pdf",
     "Additional terms & performance-bond clauses in 09_8_Syarat-syarat_Tambahan.pdf",
     "No company/price data in technical uploads; PROTÉGÉ-RTW programme encouraged"
   ],
@@ -237,6 +242,7 @@ const tenders = [
   "tags": ["Cybersecurity", "WAF", "Managed Service"],
   "isFeatured": false,
   documents: [
+      // NOTE: Update size: 0 with actual file sizes in bytes for all documents
       { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000019695/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000019695/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000019695/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
@@ -254,7 +260,7 @@ const tenders = [
 {
   "title": "SUPPLY OF SUPPORT SOFTWARE FOR THE BIOMETRIC DEVELOPMENT PROGRAMME FOR LAND-USE AND FOREST CONSERVATION IN SABAH",
   "agency": "MINISTRY OF NATURAL RESOURCES AND NATURAL SUSTAINABILITY – Sabah Forestry Department",
-  "description": "Single-lot quotation to supply, license, deliver, install and provide one-day online technical training for image-analysis software required by the Sabah Forestry Department’s Biometric Land-Use & Forest-Conservation Programme. Items include: (i) ENVI + IDL v11.4 perpetual licence for pixel-based remote-sensing and spectral processing, and (ii) Trimble eCognition Developer NPO v10.4 licence for object-based image analysis. Delivery to the Forestry Research Centre, Sandakan; vendor must provide activation, configuration and troubleshooting support for 12 months. Detailed functional and training requirements are in 05_Spesifikasi.pdf.",
+  "description": "Single-lot quotation to supply, license, deliver, install and provide one-day online technical training for image-analysis software required by the Sabah Forestry Department's Biometric Land-Use & Forest-Conservation Programme. Items include: (i) ENVI + IDL v11.4 perpetual licence for pixel-based remote-sensing and spectral processing, and (ii) Trimble eCognition Developer NPO v10.4 licence for object-based image analysis. Delivery to the Forestry Research Centre, Sandakan; vendor must provide activation, configuration and troubleshooting support for 12 months. Detailed functional and training requirements are in 05_Spesifikasi.pdf.",
   "category": "Software / Remote-Sensing GIS",
   "location": "Sabah (primary service at Sandakan; work covers all listed districts)",
   "budget": "RM 280,000.00 (indicative)",
@@ -262,18 +268,19 @@ const tenders = [
   "publishedDate": "2025-06-27T12:00:00Z",
   "tenderId": "QT250000000018131",
   "requirements": [
-    "Supplier status: Open; MoF field code 210104 (ICT → Software / System Dev / Maintenance) :contentReference[oaicite:8]{index=8}",
-    "Offer validity: 90 days (until 2025-10-02) :contentReference[oaicite:9]{index=9}",
-    "Delivery & service address: Forestry Research Centre, Sepilok, Sandakan (see 03_Delivery_Address.pdf) :contentReference[oaicite:10]{index=10}",
-    "Provide ENVI + IDL v11.4 and eCognition Developer v10.4 licences incl. one-day technical training (05_Spesifikasi.pdf) :contentReference[oaicite:11]{index=11}",
+    "Supplier status: Open; MoF field code 210104 (ICT → Software / System Dev / Maintenance)",
+    "Offer validity: 90 days (until 2025-10-02)",
+    "Delivery & service address: Forestry Research Centre, Sepilok, Sandakan (see 03_Delivery_Address.pdf)",
+    "Provide ENVI + IDL v11.4 and eCognition Developer v10.4 licences incl. one-day technical training (05_Spesifikasi.pdf)",
     "Complete Technical & Financial compliance checklists (06_ & 07_) ",
-    "Adhere to General & Special Conditions (04_Syarat_Syarat_Am_…). :contentReference[oaicite:12]{index=12}",
-    "PROTÉGÉ-RTW programme encouraged if contract exceeds threshold (see draft SST letter 08_). :contentReference[oaicite:13]{index=13}"
+    "Adhere to General & Special Conditions (04_Syarat_Syarat_Am_…).",
+    "PROTÉGÉ-RTW programme encouraged if contract exceeds threshold (see draft SST letter 08_)."
   ],
   "status": "active",
   "tags": ["Software", "Biometrics", "Forestry", "GIS"],
   "isFeatured": false,
   documents: [
+      // NOTE: Update size: 0 with actual file sizes in bytes for all documents
       { name: "01_Kenyataan_Tawaran_Pembekal (1).pdf",  path: "scraper/QT250000000018131/01_Kenyataan_Tawaran_Pembekal (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "02_Sampel_Surat_Akuan_Pembida (1).pdf",  path: "scraper/QT250000000018131/02_Sampel_Surat_Akuan_Pembida (1).pdf",  size: 0, mimeType: "application/pdf" },
       { name: "03_Delivery_Address.pdf",                path: "scraper/QT250000000018131/03_Delivery_Address.pdf",                size: 0, mimeType: "application/pdf" },
