@@ -111,4 +111,4 @@ const TenderCard = ({ tender, eligibilitySummary }) => {
   );
 };
 
-export default TenderCard;
+export const TenderCard = ({ tender, eligibilitySummary }) => { ... };
