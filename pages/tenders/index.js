@@ -41,17 +41,17 @@ export default function TenderFeed() {
     fetcher
   );
 
-  // Available categories and locations for filtering
-  const categories = ['all', 'Construction', 'IT Services', 'Healthcare', 'Consulting'];
-  const locations = ['all', 'Kuala Lumpur', 'Putrajaya', 'Selangor', 'Johor'];
+  // Extract unique categories and locations from tenders
+  const categories = ['all', ...(tenders ? [...new Set(tenders.map(tender => tender.category).filter(Boolean))] : [])];
+  const locations = ['all', ...(tenders ? [...new Set(tenders.map(tender => tender.location).filter(Boolean))] : [])];
 
   // Filter tenders based on search and filters
   const filteredTenders = tenders?.filter(tender => {
     const matchesSearch = tender.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         tender.agency.toLowerCase().includes(searchTerm.toLowerCase());
+                         tender.agency.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (tender.description && tender.description.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = selectedCategory === 'all' || tender.category === selectedCategory;
-    // For location filtering, we'll use a simple match since our mock data doesn't have location field
-    const matchesLocation = selectedLocation === 'all';
+    const matchesLocation = selectedLocation === 'all' || tender.location === selectedLocation;
     
     return matchesSearch && matchesCategory && matchesLocation;
   }) || [];
@@ -117,7 +117,7 @@ export default function TenderFeed() {
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
-              placeholder="Search tenders by title, agency, or tags..."
+              placeholder="Search tenders by title, agency, or description..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"

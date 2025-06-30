@@ -29,10 +29,11 @@ import {
   AlertCircle,
   Languages,
   ShieldCheck,
-  XCircle
+  XCircle,
+  ExternalLink
 } from 'lucide-react';
 import { formatDistanceToNow, format } from 'date-fns';
-import AIAssistant from '../../components/AIAssistant/AIAssistant'; // Import the new component
+import AIAssistant from '../../components/AIAssistant/AIAssistant';
 
 export default function TenderDetails() {
   const router = useRouter();
@@ -214,6 +215,9 @@ export default function TenderDetails() {
     (new Date(tender.closingDate) - new Date()) / (1000 * 60 * 60 * 24)
   );
 
+  // Determine if tender is closing soon (within 7 days)
+  const isClosingSoon = daysUntilClosing <= 7 && daysUntilClosing > 0;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Back Navigation */}
@@ -240,22 +244,29 @@ export default function TenderDetails() {
                       <Building className="w-4 h-4" />
                       <span>{tender.agency}</span>
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <MapPin className="w-4 h-4" />
-                      <span>Malaysia</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <FileText className="w-4 h-4" />
-                      <span>{tender.category}</span>
-                    </div>
+                    {tender.location && (
+                      <div className="flex items-center space-x-1">
+                        <MapPin className="w-4 h-4" />
+                        <span>{tender.location}</span>
+                      </div>
+                    )}
+                    {tender.tenderId && (
+                      <div className="flex items-center space-x-1">
+                        <FileText className="w-4 h-4" />
+                        <span>{tender.tenderId}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">{tender.category}</Badge>
+                    {tender.category && <Badge variant="outline">{tender.category}</Badge>}
                     {tender.isNew && <Badge variant="outline">Featured</Badge>}
+                    {tender.tags && tender.tags.map(tag => (
+                      <Badge key={tag} variant="outline">{tag}</Badge>
+                    ))}
                     {getEligibilityBadge()}
                   </div>
                 </div>
-                {getStatusBadge(tender.isNew ? 'new' : 'active')}
+                {getStatusBadge(isClosingSoon ? 'closing-soon' : (tender.isNew ? 'new' : 'active'))}
               </div>
             </CardHeader>
           </Card>
@@ -422,7 +433,7 @@ export default function TenderDetails() {
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="description">Description</TabsTrigger>
                 <TabsTrigger value="requirements">Requirements</TabsTrigger>
-                <TabsTrigger value="contact">Contact</TabsTrigger>
+                <TabsTrigger value="documents">Documents</TabsTrigger>
               </TabsList>
               
               <TabsContent value="description" className="p-6">
@@ -444,23 +455,61 @@ export default function TenderDetails() {
               
               <TabsContent value="requirements" className="p-6">
                 <h3 className="text-lg font-semibold mb-4">Requirements & Qualifications</h3>
-                <div className="text-gray-700">
-                  <p>Specific requirements will be detailed in the tender documentation.</p>
-                </div>
+                {tender.requirements && tender.requirements.length > 0 ? (
+                  <ul className="space-y-3">
+                    {tender.requirements.map((req, index) => (
+                      <li key={index} className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700">{req}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="text-gray-700">
+                    <p>Specific requirements will be detailed in the tender documentation.</p>
+                  </div>
+                )}
               </TabsContent>
               
-              <TabsContent value="contact" className="p-6">
-                <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">Agency</label>
-                    <p className="text-gray-900">{tender.agency}</p>
+              <TabsContent value="documents" className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Tender Documents</h3>
+                {tender.documents && tender.documents.length > 0 ? (
+                  <div className="space-y-3">
+                    {tender.documents.map((doc, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <FileText className="w-5 h-5 text-blue-500" />
+                          <div>
+                            <p className="font-medium text-gray-900">{doc.name}</p>
+                            <p className="text-sm text-gray-500">
+                              {doc.type || 'Document'} • {doc.size ? `${Math.round(doc.size / 1024)} KB` : 'Unknown size'}
+                            </p>
+                          </div>
+                        </div>
+                        {doc.signedUrl ? (
+                          <a 
+                            href={doc.signedUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-secondary text-sm"
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            Download
+                          </a>
+                        ) : (
+                          <Button variant="outline" size="sm" disabled>
+                            <Download className="w-4 h-4 mr-2" />
+                            Download
+                          </Button>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">Category</label>
-                    <p className="text-gray-900">{tender.category}</p>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">No documents available for this tender.</p>
                   </div>
-                </div>
+                )}
               </TabsContent>
             </Tabs>
           </Card>
@@ -474,6 +523,12 @@ export default function TenderDetails() {
               <CardTitle>Key Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              {tender.budget && (
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Budget</label>
+                  <p className="text-xl font-bold text-gray-900">{tender.budget}</p>
+                </div>
+              )}
               <div>
                 <label className="text-sm font-medium text-gray-500">Closing Date</label>
                 <p className="font-semibold text-gray-900">{new Date(tender.closingDate).toLocaleDateString()}</p>
@@ -482,10 +537,24 @@ export default function TenderDetails() {
                   <span>{getDaysUntilClosing(tender.closingDate)}</span>
                 </p>
               </div>
-              <div>
-                <label className="text-sm font-medium text-gray-500">Category</label>
-                <p className="text-gray-900">{tender.category}</p>
-              </div>
+              {tender.publishedDate && (
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Published</label>
+                  <p className="text-gray-900">{new Date(tender.publishedDate).toLocaleDateString()}</p>
+                </div>
+              )}
+              {tender.category && (
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Category</label>
+                  <p className="text-gray-900">{tender.category}</p>
+                </div>
+              )}
+              {tender.location && (
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Location</label>
+                  <p className="text-gray-900">{tender.location}</p>
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -548,6 +617,54 @@ export default function TenderDetails() {
               </Button>
             </CardContent>
           </Card>
+
+          {/* Documents */}
+          {tender.documents && tender.documents.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <FileText className="w-5 h-5" />
+                  <span>Documents</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {tender.documents.map((doc, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <FileText className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm text-gray-900 line-clamp-1">{doc.name}</span>
+                    </div>
+                    {doc.signedUrl ? (
+                      <a 
+                        href={doc.signedUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : (
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="p-1 h-auto"
+                        onClick={async () => {
+                          try {
+                            const result = await api(`/api/files/signed-url?filePath=${encodeURIComponent(doc.path)}`);
+                            window.open(result.signedUrl, '_blank');
+                          } catch (error) {
+                            addToast('Failed to generate download link', 'error');
+                          }
+                        }}
+                      >
+                        <Download className="w-4 h-4" />
+                      </Button>
+                    )}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Voice Summary */}
           <Card className="border-purple-200 bg-purple-50/50">

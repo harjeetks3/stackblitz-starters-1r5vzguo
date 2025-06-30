@@ -32,6 +32,37 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Tender not found' });
     }
 
+    // Generate signed URLs for files if they exist
+    const documents = [];
+    if (tender.files && tender.files.length > 0) {
+      for (const file of tender.files) {
+        try {
+          const { data } = await supabase.storage
+            .from('documents')
+            .createSignedUrl(file.file_path, 3600); // 1 hour expiry
+          
+          documents.push({
+            id: file.id,
+            name: file.file_name,
+            size: file.file_size,
+            type: file.mime_type,
+            path: file.file_path,
+            signedUrl: data?.signedUrl
+          });
+        } catch (urlError) {
+          console.error('Error generating signed URL:', urlError);
+          // Add file without signed URL
+          documents.push({
+            id: file.id,
+            name: file.file_name,
+            size: file.file_size,
+            type: file.mime_type,
+            path: file.file_path
+          });
+        }
+      }
+    }
+
     // Transform data to match frontend expectations (snake_case to camelCase)
     const transformedTender = {
       id: tender.id,
@@ -45,7 +76,7 @@ export default async function handler(req, res) {
       publishedDate: tender.published_date,
       tenderId: tender.tender_id,
       requirements: tender.requirements,
-      documents: tender.documents,
+      documents: documents,
       contactInfo: tender.contact_info,
       status: tender.status,
       tags: tender.tags,
