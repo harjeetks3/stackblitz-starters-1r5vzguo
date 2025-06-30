@@ -1,8 +1,4 @@
-// pages/tenders/index.js
-// Updated tenders listing page with new modern design and eligibility scoring
-// Converted from React Router to Next.js routing
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useSWR from 'swr';
 import { fetcher, api } from '../../lib/api';
@@ -20,7 +16,9 @@ import {
   Building, 
   Clock,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  DollarSign,
+  X
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -31,6 +29,15 @@ export default function TenderFeed() {
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [eligibilitySummaries, setEligibilitySummaries] = useState({});
   const [isLoadingEligibility, setIsLoadingEligibility] = useState(false);
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
+  const moreFiltersRef = useRef(null);
+  
+  // Advanced filter states
+  const [minBudget, setMinBudget] = useState('');
+  const [maxBudget, setMaxBudget] = useState('');
+  const [closingDateBefore, setClosingDateBefore] = useState('');
+  const [closingDateAfter, setClosingDateAfter] = useState('');
+  const [showNewOnly, setShowNewOnly] = useState(false);
 
   // Fetch tenders data from API
   const { data: tenders, error, isLoading } = useSWR('/api/tenders', fetcher);
@@ -41,19 +48,73 @@ export default function TenderFeed() {
     fetcher
   );
 
+  // Close pop-out when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (moreFiltersRef.current && !moreFiltersRef.current.contains(event.target)) {
+        setShowMoreFilters(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [moreFiltersRef]);
+
   // Extract unique categories and locations from tenders
   const categories = ['all', ...(tenders ? [...new Set(tenders.map(tender => tender.category).filter(Boolean))] : [])];
   const locations = ['all', ...(tenders ? [...new Set(tenders.map(tender => tender.location).filter(Boolean))] : [])];
 
-  // Filter tenders based on search and filters
+  // Apply all filters to tenders
   const filteredTenders = tenders?.filter(tender => {
+    // Basic filters
     const matchesSearch = tender.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          tender.agency.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          (tender.description && tender.description.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = selectedCategory === 'all' || tender.category === selectedCategory;
     const matchesLocation = selectedLocation === 'all' || tender.location === selectedLocation;
     
-    return matchesSearch && matchesCategory && matchesLocation;
+    // Advanced filters
+    let matchesAdvancedFilters = true;
+    
+    // Budget filtering (simple string comparison for demo)
+    if (minBudget) {
+      const numericBudget = parseFloat(tender.budget?.replace(/[^0-9.]/g, '') || 0);
+      if (numericBudget < parseFloat(minBudget)) {
+        matchesAdvancedFilters = false;
+      }
+    }
+    
+    if (maxBudget) {
+      const numericBudget = parseFloat(tender.budget?.replace(/[^0-9.]/g, '') || 0);
+      if (numericBudget > parseFloat(maxBudget)) {
+        matchesAdvancedFilters = false;
+      }
+    }
+    
+    // Closing date filtering
+    if (closingDateAfter && tender.closingDate) {
+      const tenderDate = new Date(tender.closingDate);
+      const filterDate = new Date(closingDateAfter);
+      if (tenderDate < filterDate) {
+        matchesAdvancedFilters = false;
+      }
+    }
+    
+    if (closingDateBefore && tender.closingDate) {
+      const tenderDate = new Date(tender.closingDate);
+      const filterDate = new Date(closingDateBefore);
+      if (tenderDate > filterDate) {
+        matchesAdvancedFilters = false;
+      }
+    }
+    
+    // New tenders only
+    if (showNewOnly && !tender.isNew) {
+      matchesAdvancedFilters = false;
+    }
+    
+    return matchesSearch && matchesCategory && matchesLocation && matchesAdvancedFilters;
   }) || [];
 
   // Fetch eligibility summaries when tenders and company profile are loaded
@@ -82,6 +143,24 @@ export default function TenderFeed() {
 
     fetchEligibilitySummaries();
   }, [tenders, companyProfile, user]);
+
+  // Reset all filters
+  const resetFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('all');
+    setSelectedLocation('all');
+    setMinBudget('');
+    setMaxBudget('');
+    setClosingDateBefore('');
+    setClosingDateAfter('');
+    setShowNewOnly(false);
+    setShowMoreFilters(false);
+  };
+
+  // Apply advanced filters
+  const applyAdvancedFilters = () => {
+    setShowMoreFilters(false);
+  };
 
   // Error state
   if (error) {
@@ -150,10 +229,112 @@ export default function TenderFeed() {
             ))}
           </select>
 
-          <Button variant="outline" className="flex items-center space-x-2">
-            <Filter className="w-4 h-4" />
-            <span>More Filters</span>
-          </Button>
+          {/* More Filters Button and Popup */}
+          <div className="relative" ref={moreFiltersRef}>
+            <Button 
+              variant="outline" 
+              className="flex items-center space-x-2"
+              onClick={() => setShowMoreFilters(!showMoreFilters)}
+            >
+              <Filter className="w-4 h-4" />
+              <span>More Filters</span>
+            </Button>
+
+            {showMoreFilters && (
+              <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-10 p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-sm font-medium text-gray-900">Advanced Filters</h4>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-6 w-6 p-0" 
+                    onClick={() => setShowMoreFilters(false)}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+                
+                <div className="space-y-3">
+                  {/* Budget Range */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Budget Range (RM)
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Input 
+                        type="number" 
+                        placeholder="Min" 
+                        value={minBudget}
+                        onChange={(e) => setMinBudget(e.target.value)}
+                      />
+                      <Input 
+                        type="number" 
+                        placeholder="Max" 
+                        value={maxBudget}
+                        onChange={(e) => setMaxBudget(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Closing Date Range */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Closing Date Range
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">From</label>
+                        <Input 
+                          type="date" 
+                          value={closingDateAfter}
+                          onChange={(e) => setClosingDateAfter(e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">To</label>
+                        <Input 
+                          type="date" 
+                          value={closingDateBefore}
+                          onChange={(e) => setClosingDateBefore(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Show New Only */}
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="showNewOnly"
+                      checked={showNewOnly}
+                      onChange={(e) => setShowNewOnly(e.target.checked)}
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    />
+                    <label htmlFor="showNewOnly" className="ml-2 block text-sm text-gray-700">
+                      Show new tenders only
+                    </label>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex justify-between pt-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={resetFilters}
+                    >
+                      Reset All
+                    </Button>
+                    <Button 
+                      size="sm"
+                      onClick={applyAdvancedFilters}
+                    >
+                      Apply Filters
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -211,11 +392,7 @@ export default function TenderFeed() {
           </p>
           <Button 
             variant="outline"
-            onClick={() => {
-              setSearchTerm('');
-              setSelectedCategory('all');
-              setSelectedLocation('all');
-            }}
+            onClick={resetFilters}
           >
             Clear Filters
           </Button>
