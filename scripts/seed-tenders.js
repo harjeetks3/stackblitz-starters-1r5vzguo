@@ -251,7 +251,6 @@ module.exports.tenders = [
       { name: "06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", path: "scraper/QT250000000019695/06_Senarai_Semak_untuk_Pematuhan_Teknikal.pdf", size: 57581, mimeType: "application/pdf" },
       { name: "07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", path: "scraper/QT250000000019695/07_Senarai_Semak_untuk_Pematuhan_Kewangan.pdf", size: 61012, mimeType: "application/pdf" },
       { name: "08_Sampel_Surat_Setuju_Terima.pdf",      path: "scraper/QT250000000019695/08_Sampel_Surat_Setuju_Terima.pdf",      size: 152797, mimeType: "application/pdf" },
-      { name: "09_8_Syarat-syarat_Tambahan.pdf",        path: "scraper/QT250000000019695/09_8_Syarat-syarat_Tambahan.pdf",        size: 0, mimeType: "application/pdf" },
       { name: "WEB APPLICATION FIREWALL (WAF) SERVICE.docx", path: "scraper/QT250000000019695/WEB APPLICATION FIREWALL (WAF) SERVICE.docx", size: 16938, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
     ]
   },
