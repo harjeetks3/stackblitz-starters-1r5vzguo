@@ -4,7 +4,7 @@
 // Updated with eligibility scoring display
 
 import Link from 'next/link';
-import { CalendarIcon, BuildingOfficeIcon, CheckCircleIcon, XCircleIcon, ShieldIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, BuildingOfficeIcon, CheckCircleIcon, XCircleIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 import Badge from './ui/badge';
 
 const TenderCard = ({ tender, eligibilitySummary }) => {
@@ -35,7 +35,7 @@ const TenderCard = ({ tender, eligibilitySummary }) => {
       case 'medium_match':
         return (
           <Badge className="bg-yellow-100 text-yellow-800 flex items-center space-x-1">
-            <ShieldIcon className="h-3 w-3" />
+            <ShieldCheckIcon className="h-3 w-3" />
             <span>{score}% Match</span>
           </Badge>
         );
@@ -49,7 +49,7 @@ const TenderCard = ({ tender, eligibilitySummary }) => {
       case 'incomplete_profile':
         return (
           <Badge className="bg-blue-100 text-blue-800 flex items-center space-x-1">
-            <ShieldIcon className="h-3 w-3" />
+            <ShieldCheckIcon className="h-3 w-3" />
             <span>Complete Profile</span>
           </Badge>
         );

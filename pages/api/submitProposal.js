@@ -3,6 +3,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { proposalOperations, attestationOperations } from '../../lib/database';
+import { algosdk, algodClient } from '../../lib/algorand';
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -94,3 +95,7 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Failed to submit proposal' });
   }
 }
+
+
+
+
